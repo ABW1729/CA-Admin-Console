@@ -23,7 +23,8 @@ const UsersPage = () => {
     console.log(score);
     try {
       await axios.post('/api/editUser', { email: mail, newscore: score});
-      const updatedUsers = await fetch('/api/getUsers',{method:'GET',cache:'no-store'});
+      const res = await fetch('/api/getUsers',{method:'GET',cache:'no-store'});
+      const updatedUsers=res.json();
       setUsers(updatedUsers.data.users);
       setEditingUsers({});
       window.location.reload();
