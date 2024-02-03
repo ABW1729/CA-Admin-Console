@@ -23,7 +23,7 @@ const UsersPage = () => {
     console.log(score);
     try {
       await axios.post('/api/editUser', { email: mail, newscore: score});
-      const updatedUsers =await fetch('/api/getUsers',{method:'GET',{next:{revalidate:0}}) .then((response) => {
+      const updatedUsers =await fetch('/api/getUsers',{method:'GET'},{next:{revalidate:0}}) .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
