@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+export const revalidate=0;
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [editingUsers, setEditingUsers] = useState({});
