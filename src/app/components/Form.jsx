@@ -23,9 +23,13 @@ const UsersPage = () => {
     console.log(score);
     try {
       await axios.post('/api/editUser', { email: mail, newscore: score});
-      const res = await fetch('/api/getUsers',{method:'GET',cache:'no-store'});
-      const updatedUsers=res.json();
-      setUsers(updatedUsers.data.users);
+      const updatedUsers =await fetch('/api/getUsers',{method:'GET',cache:'no-store'}) .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      setUsers(updatedUsers.uniqueUsers);
       setEditingUsers({});
       window.location.reload();
       alert('Data updated successfully!');
