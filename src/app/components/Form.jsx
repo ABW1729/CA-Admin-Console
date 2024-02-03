@@ -22,8 +22,8 @@ const UsersPage = () => {
   const handleEdit = async (mail,score) => {
     console.log(score);
     try {
-      await axios.post('/api/editUser', { email: mail, newscore: score});
-      const updatedUsers = await axios.get('/api/getUsers');
+      await axios('/api/editUser', { email: mail, newscore: score});
+      const updatedUsers = await fetch('/api/getUsers',{method:'GET',cache:'no-store'});
       setUsers(updatedUsers.data.users);
       setEditingUsers({});
       window.location.reload();
