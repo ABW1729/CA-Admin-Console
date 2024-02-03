@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-export const revalidate=0;
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [editingUsers, setEditingUsers] = useState({});
@@ -23,7 +22,7 @@ const handleEdit = async (mail, score) => {
 
   try {
     await axios.post('/api/editUser', { email: mail, newscore: score });
-    const response = await axios.get('/api/getUsers');
+    const response = await axios.get('/api/getUsers',{next:{revalidate:0}});
     const updatedUsers = response.data.users;
 
     // Check if the data is updated successfully
