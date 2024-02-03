@@ -19,19 +19,19 @@ const UsersPage = () => {
     fetchUsers();
   }, []);
 
-  const handleEdit = async (mail,score) => {
-    console.log(score);
-    try {
-      await axios.post('/api/editUser', { email: mail, newscore: score});
-      const updatedUsers = await axios.get('/api/getUsers');
-      setUsers(updatedUsers.data.users);
-      setEditingUsers({});
-      window.location.reload();
-      alert('Data updated successfully!');
-    } catch (error) {
-      console.error('Error editing user:', error);
-    }
-  };
+const handleEdit = async (mail, score) => {
+  console.log(score);
+  try {
+    await axios.post('/api/editUser', { email: mail, newscore: score });
+    await axios.get('/api/getUsers');
+    setEditingUsers({});
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Add a delay to wait for the data to update
+    window.location.reload(true); // Pass true to force a full page reload
+    alert('Data updated successfully!');
+  } catch (error) {
+    console.error('Error editing user:', error);
+  }
+};
 
   return (
     <div>
