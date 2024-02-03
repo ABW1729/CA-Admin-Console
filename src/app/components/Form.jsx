@@ -22,7 +22,7 @@ const handleEdit = async (mail, score) => {
 
   try {
     await axios.post('/api/editUser', { email: mail, newscore: score });
-    const response = await axios.get('/api/getUsers',{next:{revalidate:0}});
+    const response = await axios.get('/api/getUsers');
     const updatedUsers = response.data.users;
 
     // Check if the data is updated successfully
