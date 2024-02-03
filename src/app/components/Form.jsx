@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [editingUsers, setEditingUsers] = useState({});
@@ -18,29 +19,19 @@ const UsersPage = () => {
     fetchUsers();
   }, []);
 
-const handleEdit = async (mail, score) => {
-
-  try {
-    await axios.post('/api/editUser', { email: mail, newscore: score });
-    const response = await axios.get('/api/getUsers');
-    const updatedUsers = response.data.users;
-
-    // Check if the data is updated successfully
-    if (updatedUsers) {
-      setUsers(updatedUsers);
+  const handleEdit = async (mail,score) => {
+    console.log(score);
+    try {
+      await axios.post('/api/editUser', { email: mail, newscore: score});
+      const updatedUsers = await axios.get('/api/getUsers');
+      setUsers(updatedUsers.data.users);
       setEditingUsers({});
-      window.location.reload(true);
+      window.location.reload();
       alert('Data updated successfully!');
-    } else {
-      // Handle the case where data update fails
-      alert('Failed to update data. Please try again.');
+    } catch (error) {
+      console.error('Error editing user:', error);
     }
-  } catch (error) {
-    console.error('Error editing user:', error);
-    // Handle the error case
-    alert('An error occurred while updating data.');
-  }
-};
+  };
 
   return (
     <div>
