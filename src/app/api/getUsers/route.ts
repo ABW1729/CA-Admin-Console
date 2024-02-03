@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { MongoClient, ObjectId } from 'mongodb';
 import { headers } from "next/headers";
-import User from '../../models/user';
 
 export async function GET(req: Request) {
   try {
