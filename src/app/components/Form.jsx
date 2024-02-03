@@ -22,7 +22,7 @@ const UsersPage = () => {
   const handleEdit = async (mail,score) => {
     console.log(score);
     try {
-      await axios('/api/editUser', { email: mail, newscore: score});
+      await axios.post('/api/editUser', { email: mail, newscore: score});
       const updatedUsers = await fetch('/api/getUsers',{method:'GET',cache:'no-store'});
       setUsers(updatedUsers.data.users);
       setEditingUsers({});
